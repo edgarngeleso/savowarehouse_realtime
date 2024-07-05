@@ -43,8 +43,8 @@ const deleteFromUsers = (userSocketID) =>{
 
 socketIO.on("connection",(socket)=>{  
 
-    socket.on("message",(message)=>{
-        const data = JSON.parse(message);
+    socket.on("create",(user)=>{
+        const data = JSON.parse(user);
         if(data.user){
             createUsers(socket.id,data.user);
         }
@@ -66,7 +66,7 @@ socketIO.on("connection",(socket)=>{
     });
 
     socketIO.emit("users",users);
-    
+
     socket.on("get-users",(message)=>{
         const data = JSON.parse(message);
         socketIO.emit("users",users);
